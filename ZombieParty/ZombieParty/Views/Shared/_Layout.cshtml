@@ -19,6 +19,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -29,9 +30,35 @@
                             <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Zombies
                             </a>
+
+                            @* Ajout du menu Armory *@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle"
+                               href="#"
+                               id="armoryDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Armory
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="armoryDropdown">
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Weapon"
+                                       asp-action="Index">
+                                        Manage Weapons
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" asp-controller="Zombie" asp-action="Index">Manage Zombies</a></li>
                                 <li><a class="dropdown-item" asp-controller="ZombieType" asp-action="Index">Manage Zombie Types</a></li>
+
+
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
