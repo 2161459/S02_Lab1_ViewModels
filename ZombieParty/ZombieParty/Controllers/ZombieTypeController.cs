@@ -68,11 +68,23 @@ namespace ZombieParty.Controllers
             ZombieTypeVM zombieTypeVM = new()
             {
                 ZombieType = new(),
-                ZombiesList = _baseDonnees.Zombies.Where(z => z.ZombieTypeId == id).ToList()
+                ZombiesList = _baseDonnees.Zombies.Where(z => z.ZombieTypeId == id).ToList(),
+                //Présenter le nombre de zombies et la moyenne des points de la liste de zombies pour chaque ZombieType
+                //ZombiesCount = _baseDonnees.Zombies.Count(), pas bon
+                //PointsAverage = _baseDonnees.Zombies.Average(p => p.Point) pas bon
             };
+            zombieTypeVM.ZombiesCount = zombieTypeVM.ZombiesList.Count();
 
-            zombieTypeVM.ZombieType = _baseDonnees.ZombieTypes.FirstOrDefault(zt => zt.Id == id);
+            zombieTypeVM.PointsAverage = zombieTypeVM.ZombiesList.Any()
+                ? zombieTypeVM.ZombiesList.Average(z => z.Point)
+                : 0;
+
             return View(zombieTypeVM);
+
+
+
+
+
         }
 
 
