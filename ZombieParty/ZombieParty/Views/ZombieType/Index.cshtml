@@ -1,4 +1,7 @@
-﻿﻿<div class="container p-3">
+﻿@* ajout cette ligne *@
+@model IEnumerable<ZombieType>﻿
+
+<div class="container p-3">
     <div class="row pt-4">
         <div class="col-10">
             <h2 class="text-primary">Zombie Type</h2>
@@ -21,10 +24,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in this.ViewBag.MaListe)
+            @* @foreach (var item in this.ViewBag.MaListe) *@
+            @* Changement ici aussi *@
+            @foreach (var item in Model)
+
             {
                 <tr>
                     <td width="80%">@item.TypeName</td>
+                    @* Ajoute cette ligne pour que la view detail s'affiche lorsqu'on clique sur un zombie name *@
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id" >@item.TypeName </a>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
                             <a class="btn btn-warning mx-2">

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ZombieParty.Models;
+using ZombieParty.ViewModels;
 
 namespace ZombieParty.Controllers
 {
@@ -14,8 +15,14 @@ namespace ZombieParty.Controllers
             //};
 
             //Ce code sert à récupérer la liste des types de zombies dans BaseDonnees et à l'envoyer à la vue (Index.cshtml) pour les afficher sur la page Web.
-            this.ViewBag.MaListe = _baseDonnees.ZombieTypes.ToList();
-            return View();
+            //this.ViewBag.MaListe = _baseDonnees.ZombieTypes.ToList();
+            //return View();
+
+            //Pour enlever le viewbag:
+            //Tu transmets directement la liste à la vue. C'est généralement préférable, car C# peut vérifier le type des données.
+            List<ZombieType> zombieTypesList = _baseDonnees.ZombieTypes.ToList();
+
+            return View(zombieTypesList);
         }
 
         //GET CREATE
@@ -50,6 +57,25 @@ namespace ZombieParty.Controllers
         {
             _baseDonnees = baseDonnees;
         }
+
+        //public IActionResult Details()
+        //{
+        //    return View();
+        //}
+        //Code permettant d’envoyer le ViewModel avec les informations requises à la View
+        public IActionResult Details(int id)
+        {
+            ZombieTypeVM zombieTypeVM = new()
+            {
+                ZombieType = new(),
+                ZombiesList = _baseDonnees.Zombies.Where(z => z.ZombieTypeId == id).ToList()
+            };
+
+            zombieTypeVM.ZombieType = _baseDonnees.ZombieTypes.FirstOrDefault(zt => zt.Id == id);
+            return View(zombieTypeVM);
+        }
+
+
 
     }
 }
