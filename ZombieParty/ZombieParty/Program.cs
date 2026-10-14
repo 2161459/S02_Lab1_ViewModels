@@ -7,6 +7,8 @@ builder.Services.AddControllersWithViews();
 
 
 // Injection des dépendances
+//Creer une instance qui permet de partager la base de donne dans toute l’application
+//Utilise un seul objet (BaseDonnees) pour toute l’application. Donc les deux controleur peuvent utiliser la meme base de donnees.
 builder.Services.AddSingleton<BaseDonnees>();
 
 var app = builder.Build();
